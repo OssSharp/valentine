@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Valentine's Day 💘</title>
+  <style>
+    :root{
+      --bg1:#fff0f6;
+      --bg2:#ffe8ef;
+      --card:#ffffffcc;
+      --text:#2b2b2b;
+      --accent:#ff4d88;
+      --accent2:#ff7aa8;
+      --shadow: 0 20px 60px rgba(255, 77, 136, .18);
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(1200px 800px at 20% 10%, var(--bg1), transparent 60%),
+        radial-gradient(1000px 700px at 80% 90%, var(--bg2), transparent 55%),
+        linear-gradient(135deg, #fff, #ffe3ec);
+      overflow:hidden;
+    }
+
+    .hearts{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.9;
+      filter: drop-shadow(0 6px 10px rgba(255,77,136,.18));
+    }
+    .heart{
+      position:absolute;
+      font-size: 18px;
+      animation: floatUp linear infinite;
+      transform: translate(-50%, 0);
+      user-select:none;
+    }
+    @keyframes floatUp{
+      from{ transform: translate(-50%, 10vh) rotate(0deg); opacity:0; }
+      10%{ opacity:1; }
+      to{ transform: translate(-50%, -120vh) rotate(25deg); opacity:0; }
+    }
+
+    .card{
+      width:min(760px, 92vw);
+      padding: clamp(18px, 3vw, 34px);
+      border-radius: 28px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 77, 136, .18);
+      backdrop-filter: blur(10px);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .ribbon{
+      position:absolute;
+      top:-60px; right:-60px;
+      width:180px; height:180px;
+      background: radial-gradient(circle at 30% 30%, #fff, #ffd3e2 40%, #ff91b7 75%, #ff4d88 100%);
+      transform: rotate(20deg);
+      border-radius: 50%;
+      opacity:.55;
+    }
+
+    h1{
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle{
+      margin:0 0 22px;
+      font-size: clamp(14px, 2.2vw, 18px);
+      opacity:.85;
+      line-height:1.5;
+    }
+
+    .big-heart{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-size: clamp(22px, 3vw, 30px);
+      margin: 10px 0 24px;
+    }
+    .pulse{
+      font-size: 42px;
+      animation: pulse 1.2s ease-in-out infinite;
+      transform-origin:center;
+    }
+    @keyframes pulse{
+      0%,100%{ transform: scale(1); }
+      50%{ transform: scale(1.12); }
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top: 10px;
+    }
+
+    button{
+      appearance:none;
+      border:0;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 650;
+      cursor:pointer;
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      box-shadow: 0 10px 24px rgba(255, 77, 136, .22);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:white;
+    }
+    button.secondary{
+      background: #ffffff;
+      color: var(--accent);
+      border:1px solid rgba(255,77,136,.25);
+      box-shadow: 0 10px 24px rgba(0,0,0,.08);
+    }
+    button:hover{ transform: translateY(-2px); filter: brightness(1.02); }
+    button:active{ transform: translateY(0px) scale(.99); }
+
+    .note{
+      margin-top: 18px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, .7);
+      border: 1px dashed rgba(255,77,136,.35);
+      border-radius: 16px;
+      line-height:1.5;
+      display:none;
+    }
+
+    .footer{
+      margin-top: 18px;
+      font-size: 13px;
+      opacity:.65;
+    }
+
+    .sparkle{
+      position:absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 0 18px rgba(255,255,255,.95);
+      pointer-events:none;
+      animation: pop .6s ease-out forwards;
+    }
+    @keyframes pop{
+      from{ transform: translate(-50%, -50%) scale(.3); opacity:1; }
+      to{ transform: translate(-50%, -50%) scale(2.6); opacity:0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <main class="card" id="card">
+    <div class="ribbon"></div>
+
+    <h1>Happy Valentine’s Day 💘</h1>
+    <p class="subtitle">
+      A tiny page full of hearts, sparkles, and good vibes.
+      Click the buttons and make it extra cute ✨
+    </p>
+
+    <div class="big-heart">
+      <span class="pulse">💗</span>
+      <div>
+        <div style="font-weight:750;">You make the world softer.</div>
+        <div style="opacity:.8;">(and way more fun)</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="confettiBtn">Send hearts</button>
+      <button class="secondary" id="noteBtn">Open a note</button>
+      <button class="secondary" id="nameBtn">Personalize</button>
+    </div>
+
+    <div class="note" id="note">
+      <div style="font-size:18px; font-weight:750; margin-bottom:6px;">Little note 💌</div>
+      <div id="noteText">
+        You’re appreciated more than you know. Today (and every day), I’m rooting for you. ❤️
+      </div>
+    </div>
+
+    <div class="footer">Made with 💖 in one HTML file.</div>
+  </main>
+
+  <script>
+    // Floating background hearts
+    const heartsWrap = document.getElementById('hearts');
+    const heartEmojis = ["💗","💖","💘","💕","❤️","💞","🌸","✨"];
+    function spawnHeart(){
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+      const left = Math.random()*100;
+      const duration = 6 + Math.random()*7;
+      const size = 14 + Math.random()*18;
+      h.style.left = left + 'vw';
+      h.style.animationDuration = duration + 's';
+      h.style.fontSize = size + 'px';
+      h.style.top = (80 + Math.random()*30) + 'vh';
+      heartsWrap.appendChild(h);
+      setTimeout(()=> h.remove(), duration*1000);
+    }
+    setInterval(spawnHeart, 350);
+    for(let i=0;i<12;i++) setTimeout(spawnHeart, i*120);
+
+    // Buttons + interactions
+    const confettiBtn = document.getElementById('confettiBtn');
+    const noteBtn = document.getElementById('noteBtn');
+    const nameBtn = document.getElementById('nameBtn');
+    const note = document.getElementById('note');
+    const noteText = document.getElementById('noteText');
+    const card = document.getElementById('card');
+
+    function sparkle(x, y){
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      s.style.left = x + 'px';
+      s.style.top = y + 'px';
+      card.appendChild(s);
+      setTimeout(()=> s.remove(), 650);
+    }
+
+    confettiBtn.addEventListener('click', (e) => {
+      // burst of hearts
+      for(let i=0;i<24;i++){
+        setTimeout(spawnHeart, i*40);
+      }
+      // sparkles around the button
+      const rect = e.target.getBoundingClientRect();
+      for(let i=0;i<10;i++){
+        const x = (rect.left + rect.width/2) - card.getBoundingClientRect().left + (Math.random()*80-40);
+        const y = (rect.top + rect.height/2) - card.getBoundingClientRect().top + (Math.random()*40-20);
+        sparkle(x, y);
+      }
+    });
+
+    noteBtn.addEventListener('click', () => {
+      note.style.display = (note.style.display === 'block') ? 'none' : 'block';
+    });
+
+    nameBtn.addEventListener('click', () => {
+      const name = prompt("Who is this for? (type a name)");
+      if(!name) return;
+      note.style.display = 'block';
+      noteText.textContent = `${name}, you deserve all the love, peace, and wins this year. I’m proud of you. ❤️`;
+      // quick heart burst
+      for(let i=0;i<16;i++) setTimeout(spawnHeart, i*60);
+    });
+
+    // Click anywhere on the card for sparkles
+    card.addEventListener('click', (e) => {
+      const rect = card.getBoundingClientRect();
+      sparkle(e.clientX - rect.left, e.clientY - rect.top);
+    });
+  </script>
+</body>
+</html>
